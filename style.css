@@ -1,0 +1,149 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+
+.quiz-container {
+  width: 100%;
+  max-width: 1250px;
+  background: #fff;
+  border-radius: 18px;
+  padding: 35px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  font-size: 2.2rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.header p {
+  color: #666;
+  line-height: 1.6;
+}
+
+.progress {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  color: #666;
+  font-size: 15px;
+}
+
+.progress-bar {
+  width: 70%;
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  width: 20%;
+  height: 100%;
+  background: #667eea;
+}
+
+.question-card {
+  background: #f8f9ff;
+  border-left: 5px solid #667eea;
+  border-radius: 12px;
+  padding: 22px;
+  margin-bottom: 25px;
+}
+
+.question-card h2 {
+  color: #333;
+  font-size: 22px;
+  line-height: 1.5;
+}
+
+.options {
+  display: grid;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 18px;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.option:hover {
+  border-color: #667eea;
+  background: #eef1ff;
+}
+
+.option input {
+  transform: scale(1.2);
+  accent-color: #667eea;
+}
+
+.option span {
+  color: #333;
+  font-size: 16px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.next-btn {
+  border: none;
+  background: #667eea;
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.next-btn:hover {
+  background: #5368d5;
+  transform: translateY(-2px);
+}
+
+footer {
+  margin-top: 25px;
+  text-align: center;
+  color: #888;
+  font-size: 14px;
+}
+
+@media (max-width: 600px) {
+  .quiz-container {
+    padding: 25px;
+  }
+
+  .question-card h2 {
+    font-size: 19px;
+  }
+
+  .option {
+    padding: 15px;
+  }
+}
