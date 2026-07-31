@@ -43,7 +43,8 @@ function quizGame(params) {
   function renderQuiz() {
     const quizQuestion = document.querySelector(".question-card h2");
     const currentQuiz = quizData[currentQuizIndex];
-    countDown(5, currentQuiz);
+    countDown(10, currentQuiz);
+    updateProgressBar(currentQuizIndex, quizData.length);
     // assign quiz data to these following elements
     quizQuestion.textContent = currentQuiz.question;
     quizOptions.innerHTML = "";
@@ -134,6 +135,16 @@ function quizGame(params) {
     document
       .querySelector("#restartBtn")
       .addEventListener("click", restartGame);
+  }
+
+  function updateProgressBar(currentQuizIndex, lengthOfQuiz) {
+    const progressTxt = document.querySelector(".progress span");
+    // const progressBar = document.querySelector(".progress-bar");
+    const progressFill = document.querySelector(".progress-fill");
+
+    progressTxt.textContent = `${currentQuizIndex} out of ${lengthOfQuiz}`;
+    progressFill.style.width = `${(currentQuizIndex / lengthOfQuiz) * 100}%`;
+    console.log(`${(currentQuizIndex / lengthOfQuiz) * 100}`);
   }
 }
 
