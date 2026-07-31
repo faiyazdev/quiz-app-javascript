@@ -138,6 +138,51 @@ footer {
   color: #888;
   font-size: 14px;
 }
+.result {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.result-card {
+  width: 100%;
+  padding: 2rem;
+  text-align: center;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.result-card h1 {
+  margin-bottom: 1rem;
+}
+
+.score {
+  font-size: 2.5rem;
+  margin: 1rem 0;
+}
+
+.percentage,
+.high-score {
+  color: #666;
+  margin: 0.5rem 0;
+}
+
+#restartBtn {
+  margin-top: 1.5rem;
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 10px;
+  background: #4f46e5;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: 0.2s;
+}
+
+#restartBtn:hover {
+  transform: translateY(-2px);
+  background: #4338ca;
+}
 
 @media (max-width: 600px) {
   .quiz-container {

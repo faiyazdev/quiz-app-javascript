@@ -88,6 +88,8 @@ function quizGame(params) {
 
   function restartGame() {
     const resultElem = document.querySelector(".result");
+    const mainContent = document.querySelector(".main-content");
+    mainContent.style.display = "block";
     resultElem.innerHTML = "";
     currentQuizIndex = 0;
     score = 0;
@@ -98,20 +100,37 @@ function quizGame(params) {
   function showResult(score) {
     nextQuestionBtn.style.display = "none";
     const resultElem = document.querySelector(".result");
-    const oldScore = localStorage.getItem("score") | 0;
-    const isNewScoreHigh = score > oldScore;
-    if (isNewScoreHigh) {
+    const mainContent = document.querySelector(".main-content");
+    mainContent.style.display = "none";
+    const oldScore = Number(localStorage.getItem("score")) || 0;
+    const isNewHighScore = score > oldScore;
+
+    if (isNewHighScore) {
       localStorage.setItem("score", score);
-      resultElem.innerHTML = `
-        <h1>Hurrah, your brand new score is ${score} out of ${quizData.length} </h1>
-      `;
-    } else {
-      resultElem.innerHTML = `
-        <h1>your score is ${score} out of ${quizData.length} </h1>
-      `;
     }
-    resultElem.innerHTML += `<button id="restartBtn">Restart the game</button>
-`;
+
+    const highScore = Math.max(score, oldScore);
+    const percentage = Math.round((score / quizData.length) * 100);
+    resultElem.innerHTML = `
+    <div class="result-card">
+      <h1>${isNewHighScore ? "🎉 New High Score!" : " Quiz Finished!"}</h1>
+
+      <p class="score">
+        <strong>${score}</strong> / ${quizData.length}
+      </p>
+
+      <p class="percentage">
+        You scored <strong>${percentage}%</strong>
+      </p>
+
+      <p class="high-score">
+        High Score: <strong>${highScore}</strong>
+      </p>
+
+      <button id="restartBtn">Play Again</button>
+    </div>
+  `;
+
     document
       .querySelector("#restartBtn")
       .addEventListener("click", restartGame);
