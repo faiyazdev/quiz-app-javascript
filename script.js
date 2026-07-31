@@ -6,7 +6,7 @@ function quizGame(params) {
   let score = 0;
   const nextQuestionBtn = document.querySelector(".actions button");
   const quizOptions = document.querySelector(".options");
-
+  let intervalId = null;
   renderQuiz();
 
   // listen for option changes and handle select option
@@ -14,6 +14,7 @@ function quizGame(params) {
     const currentQuiz = quizData[currentQuizIndex];
     if (e.target.value === currentQuiz.answer) {
       score++;
+      clearInterval(intervalId);
     }
     document.querySelectorAll(".option input").forEach((inp) => {
       inp.disabled = true;
@@ -35,7 +36,6 @@ function quizGame(params) {
       currentQuizIndex++;
       renderQuiz();
     } else {
-      nextQuestionBtn.style.display = "none";
       showResult(score);
     }
   });
@@ -43,6 +43,7 @@ function quizGame(params) {
   function renderQuiz() {
     const quizQuestion = document.querySelector(".question-card h2");
     const currentQuiz = quizData[currentQuizIndex];
+    countDown(5, currentQuiz);
     // assign quiz data to these following elements
     quizQuestion.textContent = currentQuiz.question;
     quizOptions.innerHTML = "";
@@ -64,6 +65,27 @@ function quizGame(params) {
     nextQuestionBtn.style.display = "none";
   }
 
+  function countDown(timerLeft, currentQuiz) {
+    clearInterval(intervalId);
+    const timerElem = document.querySelector(".timer");
+    timerElem.innerHTML = timerLeft;
+    intervalId = setInterval(() => {
+      timerLeft--;
+      timerElem.innerHTML = timerLeft;
+
+      if (timerLeft <= 0) {
+        clearInterval(intervalId);
+        document.querySelectorAll(".option input").forEach((inp) => {
+          inp.disabled = true;
+          if (inp.value === currentQuiz.answer) {
+            inp.parentElement.style.background = "#4aef0329";
+          }
+        });
+        nextQuestionBtn.style.display = "block";
+      }
+    }, 1000);
+  }
+
   function restartGame() {
     const resultElem = document.querySelector(".result");
     resultElem.innerHTML = "";
@@ -74,6 +96,7 @@ function quizGame(params) {
   }
 
   function showResult(score) {
+    nextQuestionBtn.style.display = "none";
     const resultElem = document.querySelector(".result");
     const oldScore = localStorage.getItem("score") | 0;
     const isNewScoreHigh = score > oldScore;
