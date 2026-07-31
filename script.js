@@ -2,7 +2,8 @@
 import { quizData } from "./db.js";
 
 function quizGame(params) {
-  let currentQuizIndex = 1;
+  let currentQuizIndex = 0;
+  let score = 0;
   const nextQuestionBtn = document.querySelector(".actions button");
   const quizOptions = document.querySelector(".options");
 
@@ -11,6 +12,9 @@ function quizGame(params) {
   // listen for option changes and handle select option
   quizOptions.addEventListener("change", (e) => {
     const currentQuiz = quizData[currentQuizIndex];
+    if (e.target.value === currentQuiz.answer) {
+      score++;
+    }
     document.querySelectorAll(".option input").forEach((inp) => {
       inp.disabled = true;
       if (inp.value === e.target.value) {
@@ -27,15 +31,20 @@ function quizGame(params) {
 
   // listen for next question btn and handle
   nextQuestionBtn.addEventListener("click", (e) => {
-    currentQuizIndex++;
-    renderQuiz();
+    if (currentQuizIndex < quizData.length - 1) {
+      currentQuizIndex++;
+      renderQuiz();
+      console.log(score, currentQuizIndex);
+    } else {
+      // showResult()
+    }
   });
 
   function renderQuiz() {
     const quizQuestion = document.querySelector(".question-card h2");
     const currentQuiz = quizData[currentQuizIndex];
     // assign quiz data to these following elements
-    quizQuestion.innerHTML = currentQuiz.question;
+    quizQuestion.textContent = currentQuiz.question;
     quizOptions.innerHTML = "";
     currentQuiz.options.forEach((option) => {
       const label = document.createElement("label");
