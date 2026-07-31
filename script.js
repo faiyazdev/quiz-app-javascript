@@ -34,9 +34,9 @@ function quizGame(params) {
     if (currentQuizIndex < quizData.length - 1) {
       currentQuizIndex++;
       renderQuiz();
-      console.log(score, currentQuizIndex);
     } else {
-      // showResult()
+      nextQuestionBtn.style.display = "none";
+      showResult(score);
     }
   });
 
@@ -62,6 +62,36 @@ function quizGame(params) {
 
     // hide next question btn
     nextQuestionBtn.style.display = "none";
+  }
+
+  function restartGame() {
+    const resultElem = document.querySelector(".result");
+    resultElem.innerHTML = "";
+    currentQuizIndex = 0;
+    score = 0;
+    renderQuiz();
+    resultElem.removeEventListener("click", restartGame);
+  }
+
+  function showResult(score) {
+    const resultElem = document.querySelector(".result");
+    const oldScore = localStorage.getItem("score") | 0;
+    const isNewScoreHigh = score > oldScore;
+    if (isNewScoreHigh) {
+      localStorage.setItem("score", score);
+      resultElem.innerHTML = `
+        <h1>Hurrah, your brand new score is ${score} out of ${quizData.length} </h1>
+      `;
+    } else {
+      resultElem.innerHTML = `
+        <h1>your score is ${score} out of ${quizData.length} </h1>
+      `;
+    }
+    resultElem.innerHTML += `<button id="restartBtn">Restart the game</button>
+`;
+    document
+      .querySelector("#restartBtn")
+      .addEventListener("click", restartGame);
   }
 }
 
