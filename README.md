@@ -42,4 +42,3 @@ No build step or installation needed.
 ## 🔗 Links
 
 - **Live Site:** [asgorfaiyaz.github.io/quiz-app-javascript](https://asgorfaiyaz.github.io/quiz-app-javascript)
-- **Repository:** [github.com/asgorfaiyaz/quiz-app-javascript](https://github.com/asgorfaiyaz/quiz-app-javascript)
